@@ -11,6 +11,33 @@ from calendar import monthrange
 st.set_page_config(page_title="CRMC Monthly Report Automation", layout="wide")
 st.title("📊 CRMC Productivity Report Assistant")
 
+with st.expander("⚙️ Click to view: Nuances & Data Requirements", expanded=True):
+    st.markdown("""
+    Please ensure your uploaded summary reports follow these formatting standards:
+
+    1. **Provider Name Format**  
+       All provider names across reports must follow this format:  
+       **First Initial. Last Name** (e.g., `A. Loveitt`)  
+       - There should be exactly one space after the period.
+
+    2. **Annualized Column**  
+       - The **annualized value** must be located in **column O** (the 15th column).  
+       - This column is used for calculating projected annual values and must be present in all applicable summary reports.
+
+    3. **Header Row**  
+       - All summary reports must have **headers in row 6**.  
+       - The script will interpret data starting from **row 7 onward**.
+
+    4. **Column Mapping**  
+       - The script copies **columns A–J** from the summary reports into **columns B–L** of the CRMC monthly sheets, starting at **row 5**.
+
+    5. **Sheet Naming**  
+       - The destination sheets must follow the pattern: `MonthYY_Primary`, `MonthYY_PSA`, and `MonthYY_MISC`.
+
+    6. **Matching Logic**  
+       - Provider names in the CRMC sheets are matched to summary reports based on **column B**, regardless of the header text.
+    """)
+
 # STEP 1: DUPLICATE SHEETS
 st.header("Step 1: Create New Month Sheets")
 uploaded_template = st.file_uploader("📎 Upload existing CRMC FY25 Production Report (.xlsx)", type="xlsx")
